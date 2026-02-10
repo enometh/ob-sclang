@@ -39,7 +39,7 @@
 ;; declare default header arguments for sclang code blocks
 (defvar org-babel-default-header-args:sclang
   '((:session . "*SCLang:Workspace*")
-    (:result . "none")))
+    (:results . "none")))
 
 (defun org-babel-expand-body:sclang (body params)
   "Expand BODY according to PARAMS, return the expanded body."
