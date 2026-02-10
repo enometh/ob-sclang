@@ -1,6 +1,9 @@
 #+TITLE: ob-sclang
 #+STARTUP: showall
 #+STARTUP: showstars
+** NOTES.madhu
+- ;madhu 260210 default branch contains fixes, rebased at will.
+
 
 ** Why do I even?
 [[https://orgmode.org/][Org-mode]] makes [[http://literateprogramming.com/][literate programming]] easy via [[https://orgmode.org/worg/library-of-babel.html][Library of Babel]]. Il simply allows to mix text with executable /code blocks/ which can also be extracted (/tangled/) into separate, executable files. The beauty of the Library of Babel implementation in org-mode lies in the fact that it supports many languages. I craved support for [[https://github.com/supercollider/supercollider][SuperCollider]] and craving became an itch when I needed to document a working pipeline alternating between executing sclang and shell scripts. I scratched an itch with this little module.
