@@ -1,4 +1,4 @@
-;;; ob-sclang.el --- Org-babel interface for SuperCollider  -*- coding: utf-8;
+;;; ob-sclang.el --- Org-babel interface for SuperCollider  -*- coding:utf-8; lexical-binding:t; -*-
 
 ;; Copyright (C) 2018 Michal Seta
 
