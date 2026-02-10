@@ -69,7 +69,38 @@ The value of the variable should be represented with correct type."
 (defun org-babel-execute:sclang (body params)
   "Execute a block of sclang code with org-babel.
 This function is called by `org-babel-execute-src-block' with BODY and PARAMS"
-  (sclang-eval-string (org-babel-expand-body:sclang body params)))
+  (let* ((results-params (cdr (assq :result-params params)))
+	 (beg (with-current-buffer sclang-post-buffer
+		(point-max)))
+	 (val (cond ((member "discard" results-params)
+		     ;; what we did before: evaluate the string in sc
+		     ;; asynchronously. but do not return the string
+		     ;; we just sent
+		     (sclang-eval-string
+		      (org-babel-expand-body:sclang body params))
+		     nil)
+		    ;; sclang-eval-sync calls `read' in the
+		    ;; process-filter but we can't always read the
+		    ;; results, of e.g. (sclang-eval-sync "1.class")
+		    (t (sclang-eval-sync
+			(org-babel-expand-body:sclang body params)))))
+	 (end (with-current-buffer sclang-post-buffer
+		(point-max)))
+	 (results
+	  (if (member "value" results-params)
+	      val
+	    (with-current-buffer sclang-post-buffer
+	      (buffer-substring beg end)))))
+    (org-babel-result-cond results-params
+      results
+      (org-babel-reassemble-table
+       results
+       (org-babel-pick-name (cdr (assq :colname-names params))
+			    (cdr (assq :colnames params)))
+       (org-babel-pick-name (cdr (assq :rowname-names params))
+			    (cdr (assq :rownames params)))))))
+
+
 
 (defun org-babel-prep-session:sclang (session params)
   "Prepare SESSION according to the header arguments specified in PARAMS."
