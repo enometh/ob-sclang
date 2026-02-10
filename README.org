@@ -14,10 +14,7 @@ First of all, you will need emacs (>=26) and SuperCollider (with emacs support) 
 It can be installed as a package  via [[https://melpa.org/#/i-ching][Melpa]]  or manually.
 
 #+BEGIN_SRC emacs-lisp
-(use-package ob-sclang
-   :config (org-babel-do-load-languages
-            'org-babel-load-languages
-            '((sclang . t))))
+(use-package ob-sclang)
 #+END_SRC
 
 To install manually  you can either drop [[file:ob-sclang.el]] somewhere in your Emacs' path or add its containing directory to ~load-path~ in =.init= file:
@@ -26,12 +23,8 @@ To install manually  you can either drop [[file:ob-sclang.el]] somewhere in your
  (add-to-list 'load-path "/path/to/ob-sclang/")
 #+END_SRC
 
-You will also have to add it to =(org-babel-do-load-languages)=
 #+BEGIN_SRC elisp
 (require 'ob-sclang)
-(org-babel-do-load-languages
-    'org-babel-load-languages
-    '((sclang . t)))
 #+END_SRC
 
 ** And then?
