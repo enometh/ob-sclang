@@ -37,9 +37,7 @@
 (add-to-list 'org-babel-tangle-lang-exts '("sclang" . "scd"))
 
 ;; declare default header arguments for sclang code blocks
-(defvar org-babel-default-header-args:sclang
-  '((:session . "*SCLang:Workspace*")
-    (:results . "none")))
+(defvar org-babel-default-header-args:sclang  nil)
 
 (defun org-babel-expand-body:sclang (body params)
   "Expand BODY according to PARAMS, return the expanded body."
@@ -102,7 +100,7 @@ This function is called by `org-babel-execute-src-block' with BODY and PARAMS"
 
 
 
-(defun org-babel-prep-session:sclang (session params)
+(defun org-babel-prep-session:sclang (_session _params)
   "Prepare SESSION according to the header arguments specified in PARAMS."
   (message "No need for session preparation"))
 

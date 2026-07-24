@@ -28,19 +28,38 @@ To install manually  you can either drop [[file:ob-sclang.el]] somewhere in your
 
 #+BEGIN_SRC elisp
 (require 'ob-sclang)
+(require 'sclang-patch-interp) ; to use :results value
 #+END_SRC
 
 ** And then?
+
+#+BEGIN_SRC sclang
+    "boo".postln;
+#+END_SRC
+
+#+RESULTS:
+: boo
 
 Well, then you type a block like this one:
 #+BEGIN_SRC org
   ,#+BEGIN_SRC sclang
     "boo".postln;
   ,#+END_SRC
+
+  ,#+RESULTS:
+  ,: boo
 #+END_SRC
 And after you hit /C-c C-c/ you should see the string appear in your =SCLang:PostBuffer*=
 
 *Note:*, make sure you execute =sclang-start= prior to executing any sclang code blocks
+
+*Note:* By default the output is also inserted under #+RESULTS.
+
+To suppress the output in the #+RESULTS output use header args
+:results none
+
+To insert the last value of the code block, use header args :results
+value. (this requires patching sclang with sclang-patch-interp.el).
 
 *** Use of variables
 
